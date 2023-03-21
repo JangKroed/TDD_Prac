@@ -16,18 +16,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Create env file
-        run: |
-          touch .env
-          cat <<EOF >> .env
-          ${{ secrets.ENV }}
       - name: Install Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: Install dependencies
-        run: npm install
+      - run: npm ci
+      - name: Create env file
+        run: |
+          touch .env
+          echo ${{ secrets.ENV }} >> .env
+          cat .env
       - name: Install Testing Packages
         run: npm install --save-dev jest node-mocks-http supertest
 
