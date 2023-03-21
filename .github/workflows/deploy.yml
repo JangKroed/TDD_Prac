@@ -1,6 +1,8 @@
 name: project-cicd
 
 on:
+  push:
+    branches: ['master']
   pull_request:
     branches: ['master']
 
@@ -17,15 +19,17 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          cat << EOF >> .env
+          cat <<EOF >> .env
           ${{ secrets.ENV }}
       - name: Install Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Install dependencies
+        run: npm install
       - name: Install Testing Packages
         run: npm install --save-dev jest node-mocks-http supertest
 
-      - name: Run test
-        run: npm test
+      - name: Run jest
+        run: npx jest
