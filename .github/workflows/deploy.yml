@@ -24,6 +24,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: Install Testing Packages
+        run: npm install --save-dev jest node-mocks-http supertest
 
       - name: Run test
         run: npm test
