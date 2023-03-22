@@ -1,8 +1,14 @@
 const request = require('supertest');
 const app = require('../../src/app');
 const newProduct = require('../data/new-product.json');
+const mongoose = require('mongoose');
 
 let firstProduct;
+
+afterAll(() => {
+    mongoose.disconnect();
+});
+
 it('POST /api/products', async () => {
     const response = await request(app).post('/api/products').send(newProduct);
     expect(response.statusCode).toBe(201);
