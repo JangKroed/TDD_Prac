@@ -25,8 +25,8 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo ${{ secrets.ENV }} >> .env
-          cat .env
+          cat << EOF >> .env
+          ${{ secrets.ENV }}
       - name: Install Testing Packages
         run: npm install --save-dev jest node-mocks-http supertest
 
