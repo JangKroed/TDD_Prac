@@ -1,12 +1,12 @@
-const request = require('supertest');
-const app = require('../../src/app');
-const newProduct = require('../data/new-product.json');
-const mongoose = require('mongoose');
+import request from 'supertest';
+import app from '../../src/app';
+import newProduct from '../data/new-product';
+import { typeORMConfig } from '../../src/db/config/connection';
 
 let firstProduct;
 
 afterAll(() => {
-    mongoose.disconnect();
+    typeORMConfig.destroy();
 });
 
 it('POST /api/products', async () => {
