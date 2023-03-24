@@ -1,4 +1,3 @@
-import { Request, Response, NextFunction } from 'express';
 import productController from '../../src/controller/product';
 import { Products } from '../../src/db/entities/product';
 import httpMocks from 'node-mocks-http';
@@ -20,7 +19,7 @@ const updatedProduct = {
     name: 'update name',
     description: 'update description',
 };
-let req, res, next;
+let req: any, res: any, next: any;
 beforeEach(() => {
     req = httpMocks.createRequest();
     res = httpMocks.createResponse();
@@ -123,11 +122,9 @@ describe('Product Controller Update', () => {
         req.params.productId = productId;
         req.body = updatedProduct;
         await productController.updateProduct(req, res, next);
-        expect(Products.save).toHaveBeenCalledWith(
-            productId,
-            updatedProduct,
-            { new: true }
-        );
+        expect(Products.save).toHaveBeenCalledWith(productId, updatedProduct, {
+            new: true,
+        });
     });
     it('should return json body and response code 200', async () => {
         req.params.productId = productId;

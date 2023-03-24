@@ -49,6 +49,8 @@ export default {
                 where: { productId: Number(productId) },
             });
 
+            if (!findProduct) throw new Error('잘못된 요청입니다.')
+
             if (name) findProduct.name = name;
             if (description) findProduct.description = description;
             if (price) findProduct.price = price;

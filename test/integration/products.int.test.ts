@@ -2,8 +2,9 @@ import request from 'supertest';
 import app from '../../src/app';
 import newProduct from '../data/new-product';
 import { typeORMConfig } from '../../src/db/config/connection';
+import { Products } from '../../src/db/entities';
 
-let firstProduct;
+let firstProduct: Products;
 
 afterAll(() => {
     typeORMConfig.destroy();
@@ -39,7 +40,7 @@ it('GET /api/products', async () => {
 
 it('GET /api/products/:productId', async () => {
     const response = await request(app).get(
-        `/api/products/${firstProduct._id}`
+        `/api/products/${firstProduct.productId}`
     );
     expect(response.statusCode).toBe(200);
     expect(response.body.name).toBe(firstProduct.name);
@@ -56,7 +57,7 @@ it('GET id doenst exist /api/products/:productId', async () => {
 
 it('PUT /api/products/:productId', async () => {
     const res = await request(app)
-        .put(`/api/products/${firstProduct._id}`)
+        .put(`/api/products/${firstProduct.productId}`)
         .send({ name: 'updated name', description: 'updated description' });
     expect(res.statusCode).toBe(200);
     expect(res.body.name).toBe('updated name');
@@ -72,14 +73,14 @@ it('should return 404 on PUT /api/products', async () => {
 
 it('DELETE /api/products', async () => {
     const res = await request(app)
-        .delete(`/api/products/${firstProduct._id}`)
+        .delete(`/api/products/${firstProduct.productId}`)
         .send();
     expect(res.statusCode).toBe(200);
 });
 
 it('DELETE id doenst exist /api/products/:productId', async () => {
     const res = await request(app)
-        .delete(`/api/products/${firstProduct._id}`)
+        .delete(`/api/products/${firstProduct.productId}`)
         .send();
     expect(res.statusCode).toBe(404);
 });

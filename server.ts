@@ -8,7 +8,6 @@ app.listen(env.PORT, () => {
 });
 
 function dbConnect() {
-    if (env.NODE_ENV !== 'test') {
         typeORMConfig
             .initialize()
             .then(() => {
@@ -23,5 +22,4 @@ function dbConnect() {
 
                 process.exit(0);
             });
-    }
 }
