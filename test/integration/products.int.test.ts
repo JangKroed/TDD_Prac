@@ -1,9 +1,16 @@
-const request = require('supertest');
-const app = require('../../src/app');
-const newProduct = require('../data/new-product.json');
-const mongoose = require('mongoose');
+import request from 'supertest';
+import app from '../../src/app';
+import newProduct from '../data/new-product';
+import mongoose from 'mongoose';
 
-let firstProduct;
+interface Product {
+    _id:string;
+    name:string;
+    description:string;
+    price:number;
+}
+
+let firstProduct: Product;
 
 afterAll(() => {
     mongoose.disconnect();

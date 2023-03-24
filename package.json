@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "test": "jest",
-        "start": "nodemon server.js"
+        "start": "nodemon ts-node server.ts"
     },
     "author": "",
     "license": "ISC",
@@ -15,9 +15,15 @@
         "mongoose": "^7.0.2"
     },
     "devDependencies": {
+        "@types/express": "^4.17.17",
+        "@types/jest": "^29.5.0",
+        "@types/node": "^18.15.7",
         "jest": "^29.5.0",
         "node-mocks-http": "^1.12.2",
         "nodemon": "^2.0.21",
-        "supertest": "^6.3.3"
+        "supertest": "^6.3.3",
+        "ts-jest": "^29.0.5",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.2"
     }
 }
