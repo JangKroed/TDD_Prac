@@ -2,7 +2,7 @@ name: project-cicd
 
 on:
   push:
-    branches: ['Types_Mongoose']
+    branches: ['Prac/Types_Mongoose']
 
 jobs:
   test:
