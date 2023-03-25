@@ -4,15 +4,18 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "test": "jest",
-        "start": "nodemon ts-node server.ts"
+        "start": "export NODE_ENV=production && node build/server.js",
+        "dev": "export NODE_ENV=development && nodemon --exec ts-node server.ts",
+        "db:create": "ts-node src/db/config/create.ts",
+        "test": "export NODE_ENV=test && jest"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
-        "mongoose": "^7.0.2"
+        "mysql2": "^3.2.0",
+        "typeorm": "^0.3.12"
     },
     "devDependencies": {
         "@types/express": "^4.17.17",

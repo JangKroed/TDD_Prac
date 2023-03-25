@@ -4,12 +4,6 @@ dotenv.config();
 
 const app = express();
 import productRoutes from './routes';
-import mongoose from 'mongoose';
-
-mongoose
-    .connect(process.env.MONGO_DB_URL!)
-    .then(() => console.log('MongoDb Connected...'))
-    .catch((err) => console.log(err));
 
 app.use(express.json());
 app.use('/api/products', productRoutes);
@@ -19,6 +13,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+    console.log(error.message);
     res.status(500).json({ message: error.message });
 });
 
