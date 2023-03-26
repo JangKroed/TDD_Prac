@@ -10,8 +10,6 @@ export const connection = new DataSource({
     password: env.DB_PASSWORD,
     database: env.DB_NAME,
     entities,
-    synchronize: true,
-    dropSchema: true,
-    // synchronize: env.DB_SYNCHRONIZE,
-    // dropSchema: env.DB_DROPSCHEMA,
+    synchronize: env.DB_SYNCHRONIZE,
+    dropSchema: env.DB_DROPSCHEMA,
 });

@@ -13,7 +13,6 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
-    console.log(error.message);
     res.status(500).json({ message: error.message });
 });
 

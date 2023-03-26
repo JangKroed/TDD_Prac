@@ -1,13 +1,20 @@
 import request from 'supertest';
+import { Connection } from 'typeorm';
 import app from '../../src/app';
 import { Products } from '../../src/db/entities';
 import newProduct from '../data/new-product';
-import { connection } from '../../src/db/config/connection';
+import mockConnection from '../mockDB/mockConnection';
 
 let firstProduct: Products;
+let connection: Connection;
 
-afterAll(() => {
-    //connection.destroy();
+beforeAll(async () => {
+    connection = await mockConnection.create();
+});
+
+afterAll(async () => {
+    await mockConnection.clear();
+    await mockConnection.close();
 });
 
 it('POST-1 /api/products', async () => {
@@ -48,7 +55,7 @@ it('GET /api/products/:productId', async () => {
 
 it('GET id doenst exist /api/products/:productId', async () => {
     const res = await request(app).get(
-        '/api/products/641741b97f12cd82aa71de66'
+        '/api/products/2222222222222'
     );
 
     expect(res.statusCode).toBe(404);

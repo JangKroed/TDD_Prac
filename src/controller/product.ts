@@ -82,7 +82,8 @@ class ProductController extends Products {
 
             const deletedProduct = await Products.delete(productId);
 
-            if (deletedProduct) res.status(200).json(deletedProduct);
+            if (deletedProduct.affected === 0) res.status(404).end();
+            else if (deletedProduct) res.status(200).json(deletedProduct);
             else res.status(404).end();
         } catch (error) {
             next(error);
