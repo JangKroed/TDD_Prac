@@ -12,12 +12,11 @@ class ProductController extends Products {
         try {
             const { name, description, price }: ProductInfo = req.body;
             if (!name || !description) throw new Error('잘못된 요청입니다.');
-
-            const createdProduct = Products.create({
-                name,
-                description,
-                price,
-            });
+    
+            const createdProduct = new Products();
+            createdProduct.name = name
+            createdProduct.description = description
+            if (price) createdProduct.price = price
 
             await Products.save(createdProduct);
 

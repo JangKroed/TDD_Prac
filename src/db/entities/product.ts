@@ -6,9 +6,8 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import env from '../../config.env'
 
-@Entity({ name: 'products', database: env.DB_NAME })
+@Entity()
 export class Products extends BaseEntity {
     @PrimaryGeneratedColumn()
     productId!: number;

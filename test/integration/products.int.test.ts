@@ -3,7 +3,6 @@ import app from '../../src/app';
 import { Products } from '../../src/db/entities';
 import newProduct from '../data/new-product';
 import { connection } from '../../src/db/config/connection';
-import { getConnection } from 'typeorm';
 
 let firstProduct: Products;
 
@@ -13,8 +12,6 @@ afterAll(() => {
 
 it('POST-1 /api/products', async () => {
     const res = await request(app).post('/api/products').send(newProduct);
-    const metadata = getConnection().entityMetadatas;
-    console.log(metadata);
     expect(res.statusCode).toBe(201);
     expect(res.body.name).toBe(newProduct.name);
     expect(res.body.description).toBe(newProduct.description);
