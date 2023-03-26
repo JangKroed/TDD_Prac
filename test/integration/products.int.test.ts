@@ -12,10 +12,10 @@ beforeAll(async () => {
     connection = await mockConnection.create();
 });
 
-afterAll(async () => {
-    await mockConnection.clear();
-    await mockConnection.close();
-});
+// afterAll(async () => {
+//     await mockConnection.clear();
+//     await mockConnection.close();
+// });
 
 it('POST-1 /api/products', async () => {
     const res = await request(app).post('/api/products').send(newProduct);

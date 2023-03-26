@@ -39,7 +39,8 @@ class Env extends dBConnection {
     PORT: number;
     constructor() {
         super();
-        this.PORT = Number(process.env.PORT);
+        this.PORT =
+            process.env.NODE_ENV === 'test' ? 3000 : Number(process.env.PORT);
     }
 }
 

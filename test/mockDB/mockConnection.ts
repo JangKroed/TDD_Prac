@@ -5,7 +5,7 @@ import * as entities from '../../src/db/entities';
 const mockConnection = {
     async create() {
         return await createConnection({
-            name:'tdd-app-test',
+            name: 'tdd-app-test',
             type: 'mysql',
             host: env.DB_HOST,
             port: 3306,
@@ -15,6 +15,7 @@ const mockConnection = {
             entities,
             synchronize: env.DB_SYNCHRONIZE,
             dropSchema: env.DB_DROPSCHEMA,
+            timezone: 'Z',
         });
     },
 

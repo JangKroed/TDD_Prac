@@ -12,11 +12,11 @@ class ProductController extends Products {
         try {
             const { name, description, price }: ProductInfo = req.body;
             if (!name || !description) throw new Error('잘못된 요청입니다.');
-    
+
             const createdProduct = new Products();
-            createdProduct.name = name
-            createdProduct.description = description
-            if (price) createdProduct.price = price
+            createdProduct.name = name;
+            createdProduct.description = description;
+            if (price) createdProduct.price = price;
 
             await Products.save(createdProduct);
 
@@ -57,20 +57,19 @@ class ProductController extends Products {
     updateProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { productId } = req.params;
-            const { name, description, price }: ProductInfo = req.body;
+            const { name, description, price } = req.body;
 
             const findProduct = await Products.findOne({
                 where: { productId: Number(productId) },
             });
 
-            if (!findProduct) return res.status(404).send();
+            if (!findProduct) res.status(404).end();
 
-            if (name) findProduct.name = name;
-            if (description) findProduct.description = description;
-            if (price) findProduct.price = price;
+            Object.assign(findProduct, req.body);
 
-            await Products.save(findProduct);
-            res.status(200).json(findProduct);
+            const updatedProduct = await Products.save(findProduct);
+
+            if (updatedProduct) res.status(200).json(updatedProduct);
         } catch (error) {
             next(error);
         }
